@@ -20,4 +20,4 @@ file: "$TRAVIS_BUILD_DIR/firmware/${file_name}"
 skip_cleanup: true
 on:
 tags: true
-repo: tuanpmt/esp_mqtt
+repo: deadolus/esp_mqtt
