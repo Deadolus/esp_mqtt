@@ -52,13 +52,14 @@ void mqttConnectedCb(uint32_t *args)
 {
 	MQTT_Client* client = (MQTT_Client*)args;
 	INFO("MQTT: Connected\r\n");
-	MQTT_Subscribe(client, "/mqtt/topic/0", 0);
-	MQTT_Subscribe(client, "/mqtt/topic/1", 1);
-	MQTT_Subscribe(client, "/mqtt/topic/2", 2);
+	MQTT_Subscribe(client, "mqtt/topic/0", 0);
+	MQTT_Subscribe(client, "mqtt/topic/1", 1);
+	MQTT_Subscribe(client, "mqtt/topic/2", 2);
 
-	MQTT_Publish(client, "/mqtt/topic/0", "hello0", 6, 0, 0);
-	MQTT_Publish(client, "/mqtt/topic/1", "hello1", 6, 1, 0);
-	MQTT_Publish(client, "/mqtt/topic/2", "hello2", 6, 2, 0);
+	MQTT_Publish(client, "mqtt/topic/0", "hello0", 6, 0, 0);
+	MQTT_Publish(client, "mqtt/topic/1", "hello1", 6, 1, 0);
+	MQTT_Publish(client, "mqtt/topic/2", "hello2", 6, 2, 0);
+	MQTT_Publish(client, "mqtt/topic/3", "hello2", 6, 2, 1);
 
 }
 
@@ -106,7 +107,7 @@ void user_init(void)
 	MQTT_InitClient(&mqttClient, sysCfg.device_id, sysCfg.mqtt_user, sysCfg.mqtt_pass, sysCfg.mqtt_keepalive, 1);
 	//MQTT_InitClient(&mqttClient, "client_id", "user", "pass", 120, 1);
 
-	MQTT_InitLWT(&mqttClient, "/lwt", "offline", 0, 0);
+	MQTT_InitLWT(&mqttClient, "/lwt", "offline", 2, 0);
 	MQTT_OnConnected(&mqttClient, mqttConnectedCb);
 	MQTT_OnDisconnected(&mqttClient, mqttDisconnectedCb);
 	MQTT_OnPublished(&mqttClient, mqttPublishedCb);
